@@ -4,7 +4,6 @@ const session = require('cookie-session');
 const bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const mongoDBuri = 'mongodb+srv://tester1:test1@kc2019-db7fy.azure.mongodb.net/test?retryWrites=true&w=majority';
-const dbName = 'user';
 const app = express();
 const projectDB = "projectDB";
 
