@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <title>Restaurant</title>
+</head>
+<body>
+    <h1><%= restaurant.name %></h1>
+    <div class="contrainer">
+        <p>
+        <label class="badge badge-info">Cuisine: </label><%= restaurant.cuisine %></p>
+        <label class="badge badge-info">Borough: </label><%= restaurant.borough %></p>
+        <label class="badge badge-info">Street: </label><%= restaurant.address.street %></p>
+        <label class="badge badge-info">Building: </label><%= restaurant.address.building %></p>
+        <label class="badge badge-info">Zipcode: </label><%= restaurant.zipcode%></p>
+        <label class="badge badge-info">GPS: </label><%= "GPS" %><p></p>
+        <label class="badge badge-info">Rating: </label><%= restaurant.rating %><p></p>
+        
+        <p>
+            <label class="badge badge-info">Created by: </label><%= restaurant.owner%></p>
+        <p>
+            
+        <p>
+            <a href="/">Home</a>
+        <p>    
+    </div>
+</body>
+</html>

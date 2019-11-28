@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <title>Restaurant</title>
+</head>
+<body>
+    <h1>Create Restaurant</h1>
+    <div class="col-md-8">
+        <form action="/restaurant/create" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label class="">Name</label>
+                <input name="name" class="form-control" type="text" required="">
+            </div>
+            <div class="form-group">
+                <label class="">Cuisine</label>
+                <input name="cuisine" class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                    <label class="">Borough</label>
+                    <input name="borough" class="form-control" type="text">
+                </div>
+            <div class="form-group">
+                <label class="">Street</label>
+                <input name="street" class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                <label class="">Building</label>
+                <input name="building" class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                <label class="">Zipcode</label>
+                <input name="zipcode" class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                <label class="">GPS Coordinates (lon.)</label>
+                <input name="lon" class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                <label class="">GPS Coordinates (lat.)</label>
+                <input name="lat" class="form-control" type="text">
+            </div>
+            <div class="form-group">
+                <label class="">Photo</label>
+                <input name="restaurant_photo" class="form-control" type="file">
+            </div>
+            <button class="btn btn-primary"> Create </button>
+        </form>
+        <p>
+
+        </p>
+        <p>
+            <a href="/users/logout">Logout</a>
+        </p>
+        <p>
+            <a href="/">Back</a>
+        </p>
+    </div>
+</body>
+</html>

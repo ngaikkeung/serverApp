@@ -1,3 +1,24 @@
-<h1>Restaurant</h1>
-<p>Welcome</p>
-<a href="/users/login">Logout</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1>Restaurant</h1>
+    <p>Welcome <%= userid %> !</p>
+    <a href="/users/logout">Logout</a>
+    <a href="/restaurant/create">Create Restaurant</a>
+
+    <% if(restaurantList !== null) { %>
+        <table>
+            <% restaurantList.map((restaurant, index) => { %>
+            <tr>
+                <td><a href="/restaurant/show?_id=<%= restaurant.restaurant_id %>"><%= index %>. <%= restaurant.name %></a></td>
+            </tr>
+            <% }) %>
+        </table>
+    <% } %>
+</body>
+</html>
