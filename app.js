@@ -16,7 +16,7 @@ app.use('/users', require('./routes/users'));
 app.use('/restaurant', require('./routes/restaurant'));
 
 app.use(function(req, res){
-    res.sendStatus(404);
+    res.render('err_page', {errTitle: "404 Not found.", errMsg: "URL path not found."})
 });
 
 

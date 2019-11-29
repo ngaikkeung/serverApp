@@ -85,7 +85,7 @@ module.exports = class DB{
             }
         }
 
-        this.editRestaurant = (restaurantObjId, restaurantUpdate, callback) => {
+        this.updateRestaurant = (restaurantObjId, restaurantUpdate, callback) => {
             if(isConnected){
                 let checkid = {
                     restaurant_id: new ObjectId(restaurantObjId)

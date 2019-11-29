@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <title>Restaurant Rate</title>
+</head>
+<body>
+    <h1>Rate</h1>
+    <div class="contrainer">
+        <form action="/restaurant/rate?_id=<%= restaurant_id %>" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                    <label class="">Score(1 - 10):</label>
+                    <input class="form-control" name="score" type="number" min="1" max="10">
+            </div>
+            <button class="btn btn-primary"> Submit </button>
+        </form>
+        <p><a href="/">Home</a><p>
+    </div>
+</body>
+</html>

@@ -178,7 +178,45 @@ app.get('/delete', (req, res) => {
             }
         })
     }
-
 })
 
+app.get('/rate', (req, res) => {
+    let restaurant_id = req.query._id;
+    res.render('restaurant_rate', {restaurant_id});
+})
+
+app.post('/rate', (req, res) => {
+    let userid = req.session.userid;
+    let restaurant_id = req.query._id;
+
+    let form = new formidable.IncomingForm();
+
+    form.parse(req, (err, fields, files) => {
+        let restaurantUpdate = {
+            $push: {
+                grades: {
+                    user: userid,
+                    score: fields['score']
+                }
+            }
+        }
+
+        DB.updateRestaurant(restaurant_id, restaurantUpdate, (err, response) => {
+            if(err){
+                console.log("ERR!")
+            }else{
+                if(response){
+                    console.log("Rate success!")
+                    res.redirect(`/restaurant/show?_id=${restaurant_id}`)
+                }else{
+                    console.log("Rate failed")
+                    res.redirect('/err_page', {
+                        errTitle: "Rate error.",
+                        errMsg: "Rating restaurant is failed."
+                    })
+                }
+            }
+        })
+    });
+})
 module.exports = app;

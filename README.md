@@ -27,17 +27,17 @@ Server App Project 2019
     • A document can only be updated by its owner (i.e. the user who created
     the document)
 
-4. Rate restaurant. A restaurant can only be rated once by the same user.
+4. ~~Rate restaurant. A restaurant can only be rated once by the same user.~~
     • score > 0 and score <= 10
 
-5. Display restaurant documents
+5. ～～Display restaurant documents～～
     • Show photo if it's available
     • Show a link to Google/Leaflet Map if coord is available
 
-6. Delete restaurant documents
+6. ~~Delete restaurant documents~~
     • A document can only be deleted by its owner
 
 7. Search
     • by name, borough, cuisine, borough, etc.
-    
+
 8. Provide the following RESTful services.
