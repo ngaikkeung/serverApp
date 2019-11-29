@@ -79,16 +79,25 @@ app.get('/show', (req,res) => {
 })
 
 app.get('/edit', (req,res) => {
+    let userid = req.session.userid;
     let restaurantObjectId = req.query._id;
-    console.log(req.query);
-    
+     
     DB.getRestaurant(restaurantObjectId, (err, response) => {
         if(err){
             console.log("ERR!", err);
         }else{
             if(response){
                 console.log("Edit form show success", response);
-                res.render('restaurant_edit', {restaurant : response});
+
+                // checking autority
+                if(userid != response.owner){
+                    res.render('err_page', {
+                        errTitle: "Autority not match.", 
+                        errMsg: "You are not the owner, not allow to update."
+                    });
+                }else{
+                    res.render('restaurant_edit', {restaurant : response});
+                }
             }else{
                 console.log("Edit form show failed", response);
             }
