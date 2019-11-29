@@ -75,4 +75,61 @@ app.get('/show', (req,res) => {
 
 })
 
+app.get('/edit', (req,res) => {
+    let restaurantObjectId = req.query._id;
+    console.log(req.query);
+    
+    DB.getRestaurant(restaurantObjectId, (err, response) => {
+        if(err){
+            console.log("ERR!", err);
+        }else{
+            if(response){
+                console.log("Edition show success", response);
+                res.render('restaurant_edit', {restaurant : response});
+            }else{
+                console.log("Edition show failed", response);
+            }
+        }
+    })
+})
+
+app.post('/edit', (req,res) => {
+    const form = new formidable.IncomingForm();
+    
+
+    form.parse(req, (err, fields, files) => {
+        let restaurantObjectId = req.query._id;
+        let restaurantUpdate = {
+            borough : fields['borough'],
+            cuisine : fields['cuisine'],
+            photo : null,
+            mimetype : files.restaurant_photo.type, // TODO
+            address : {
+                street : fields['street'],
+                building : fields['building'],
+                coord : {
+                    latitude: fields['lon'],
+                    longitude: fields['lat'],
+                },
+            },
+        }
+        
+        DB.editRestaurant(restaurantUpdate, restaurantObjectId, (err, response) => {
+            if(err){
+                console.log("ERR!", err);
+            }else{
+                if(response){
+                    console.log("Edit restaurant success");
+                    res.redirect(`/restaurant/show?_id=${restaurantObj.restaurant_id}`);
+                }else{
+                    console.log("Edit restaurant failed", err);
+                    res.redirect(`/restaurant/edit`);
+                }
+            }
+        })
+    })
+
+    
+})
+
 module.exports = app;

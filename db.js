@@ -85,5 +85,16 @@ module.exports = class DB{
                 callback(true, "DB is disconnected");
             }
         }
+
+        this.editRestaurant = (restaurantUpdate, restaurantObjectId, callback) => {
+            if(isConnected){
+                let checkid = {_id: new ObjectId(restaurantObjectId)};
+                database.collection("restaurant").updateOne(checkid, restaurantUpdate, (err, res) => {
+                    callback(err, res);
+                })
+            }else{
+                callback(true, "DB is disconnected");
+            }
+        }
     }
 }
