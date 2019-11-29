@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
                 console.log("ERR!", err);
             }else{
                 if(response){
-                    console.log("Show success", response);
+                    console.log("Show success");
                     res.render('home', {userid: req.session.userid, restaurantList: response});
                 }else{
                     console.log("Show failed", response);

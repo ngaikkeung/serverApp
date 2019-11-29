@@ -15,7 +15,7 @@
         <table>
             <% restaurantList.map((restaurant, index) => { %>
             <tr>
-                <td><a href="/restaurant/show?_id=<%= restaurant.restaurant_id %>"><%= index %>. <%= restaurant.name %></a></td>
+                <td><a href="/restaurant/show?_id=<%= restaurant.restaurant_id %>"><%= ++index %>. <%= restaurant.name %></a></td>
             </tr>
             <% }) %>
         </table>
