@@ -97,5 +97,18 @@ module.exports = class DB{
                 callback(true, "DB is disconnected");
             }
         }
+
+        this.deleteRestaurant = (restaurantObjId, callback) => {
+            if(isConnected){
+                let deleteid = {
+                    restaurant_id: new ObjectId(restaurantObjId)
+                };
+                database.collection("restaurant").deleteOne(deleteid, (err, res) => {
+                    callback(err, res);
+                })
+            }else{
+                callback(true, "DB is disconnected");
+            }
+        }
     }
 }

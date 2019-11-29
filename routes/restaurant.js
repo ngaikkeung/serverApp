@@ -153,4 +153,32 @@ app.get('/map', (req, res) => {
     res.render('restaurant_map', {location: location}); 
 });
 
+app.get('/delete', (req, res) => {
+    let restaurantObjectId = req.query._id;
+    let deleteOwner = req.query.owner;
+    let userid = req.session.userid;
+
+    if(userid != deleteOwner){
+        res.render('err_page', {
+            errTitle: "Autority not match.", 
+            errMsg: "You are not the owner, not allow to update."
+        });
+    }else{
+        DB.deleteRestaurant(restaurantObjectId, (err, response) => {
+            if(err){
+                console.log("ERR!", err);
+            }else{
+                if(response){                
+                    console.log("Delete success");
+                    res.render(`delsuccess`);
+                }else{
+                    console.log("Delete failed", err);
+                    res.redirect(`/restaurant/show`);
+                }
+            }
+        })
+    }
+
+})
+
 module.exports = app;

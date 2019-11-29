@@ -25,6 +25,7 @@
         
         <p><label class="badge badge-info">Created by: </label><%= restaurant.owner%></p><p>
         <p><a href="/restaurant/edit?_id=<%= restaurant.restaurant_id %>">Edit</a></p>
+        <p><a href="/restaurant/delete?_id=<%= restaurant.restaurant_id %>&owner=<%= restaurant.owner %>">Delete</a></p>
         <p><a href="/restaurant/map?lat=<%= restaurant.address.coord.latitude %>&lon=<%= restaurant.address.coord.longitude%>">Map</a><p>    
         <p><a href="/">Home</a><p>
     </div>
