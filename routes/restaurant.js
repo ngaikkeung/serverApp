@@ -99,7 +99,8 @@ app.post('/edit', (req,res) => {
 
     form.parse(req, (err, fields, files) => {
         let restaurantObjectId = req.query._id;
-        let restaurantUpdate = {
+        let restaurantUpdate = { $set: {
+            name: fields['name'],
             borough : fields['borough'],
             cuisine : fields['cuisine'],
             photo : null,
@@ -111,8 +112,8 @@ app.post('/edit', (req,res) => {
                     latitude: fields['lon'],
                     longitude: fields['lat'],
                 },
-            },
-        }
+            }
+        }}
         
         DB.editRestaurant(restaurantUpdate, restaurantObjectId, (err, response) => {
             if(err){
