@@ -98,10 +98,10 @@ app.get('/edit', (req,res) => {
 
 app.post('/edit', (req,res) => {
     const form = new formidable.IncomingForm();
-    
+    let restaurantObjectId = req.query._id;
 
     form.parse(req, (err, fields, files) => {
-        let restaurantObjectId = req.query._id;
+        
         let restaurantUpdate = { $set: {
             name: fields['name'],
             borough : fields['borough'],
@@ -118,13 +118,13 @@ app.post('/edit', (req,res) => {
             }
         }}
         
-        DB.editRestaurant(restaurantUpdate, restaurantObjectId, (err, response) => {
+        DB.editRestaurant(restaurantObjectId, restaurantUpdate, (err, response) => {
             if(err){
                 console.log("ERR!", err);
             }else{
                 if(response){
                     console.log("Edit restaurant success");
-                    res.redirect(`/restaurant/show?_id=${restaurantObj.restaurant_id}`);
+                    res.redirect(`/restaurant/show?_id=${restaurant.restaurantObjectId}`);
                 }else{
                     console.log("Edit restaurant failed", err);
                     res.redirect(`/restaurant/edit`);
