@@ -19,13 +19,13 @@
         <label class="badge badge-info">Borough: </label><%= restaurant.borough %></p>
         <label class="badge badge-info">Street: </label><%= restaurant.address.street %></p>
         <label class="badge badge-info">Building: </label><%= restaurant.address.building %></p>
-        <label class="badge badge-info">Zipcode: </label><%= restaurant.zipcode%></p>
+        <label class="badge badge-info">Zipcode: </label><%= restaurant.address.zipcode %></p>
         <label class="badge badge-info">GPS: </label>[<%= restaurant.address.coord.latitude %>, <%= restaurant.address.coord.longitude %>]</p>
         <label class="badge badge-info">Rating: </label><%= restaurant.rating %><p></p>
         
         <p><label class="badge badge-info">Created by: </label><%= restaurant.owner%></p><p>
         <p><a href="/restaurant/edit?_id=<%= restaurant.restaurant_id %>">Edit</a></p>
-        <p><a href="/restaurant/map">Map</a><p>    
+        <p><a href="/restaurant/map?lat=<%= restaurant.address.coord.latitude %>&lon=<%= restaurant.address.coord.longitude%>">Map</a><p>    
         <p><a href="/">Home</a><p>
     </div>
 </body>

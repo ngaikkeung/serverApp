@@ -85,9 +85,11 @@ module.exports = class DB{
             }
         }
 
-        this.editRestaurant = (restaurantUpdate, restaurantObjectId, callback) => {
+        this.editRestaurant = (restaurantObjId, restaurantUpdate, callback) => {
             if(isConnected){
-                let checkid = {_id: new ObjectId(restaurantObjectId)};
+                let checkid = {
+                    restaurant_id: new ObjectId(restaurantObjId)
+                };
                 database.collection("restaurant").updateOne(checkid, restaurantUpdate, (err, res) => {
                     callback(err, res);
                 })
