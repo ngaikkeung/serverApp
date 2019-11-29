@@ -26,32 +26,35 @@ app.post('/create', (req,res) => {
                 street : fields['street'],
                 building : fields['building'],
                 coord : {
-                    latitude: fields['lon'],
-                    longitude: fields['lat'],
+                    latitude: fields['lat'],
+                    longitude: fields['lon'],
+                    zipcode: fields['zipcode'],
                 },
             },
             owner : userid // TODO
         }
 
         fs.readFile(files.restaurant_photo.path, (err, data) => {
-            if(!err){
-                restaurantObj.photo = new Buffer(data).toString("base64");
-            }else{
-                console.log("/Create/restaurant: read photo failed");
-            }
-        })
-
-        DB.createRestaurant(restaurantObj, (err, response) => {
-            if(err){
-                console.log("ERR!", err);
-            }else{
-                if(response){
-                    console.log("Create restaurant success");
-                    res.redirect(`/restaurant/show?_id=${restaurantObj.restaurant_id}`);
-                }else{
-                    console.log("Create restaurant failed", err);
-                    res.redirect(`/restaurant/create`);
+            if (!err) {
+                if(data != ""){
+                    restaurantObj.photo = new Buffer(data).toString("base64");
                 }
+                
+                DB.createRestaurant(restaurantObj, (err, response) => {
+                    if(err){
+                        console.log("ERR!", err);
+                    }else{
+                        if(response){
+                            console.log("Create restaurant success");
+                            res.redirect(`/restaurant/show?_id=${restaurantObj.restaurant_id}`);
+                        }else{
+                            console.log("Create restaurant failed", err);
+                            res.redirect(`/restaurant/create`);
+                        }
+                    }
+                })
+            }else {
+                console.log("/Create/restaurant: read photo failed");
             }
         })
     })
@@ -65,7 +68,7 @@ app.get('/show', (req,res) => {
             console.log("ERR!", err);
         }else{
             if(response){
-                console.log("Show success", response);
+                console.log("Show success");
                 res.render('restaurant_show', {restaurant : response});
             }else{
                 console.log("Show failed", response);
@@ -129,8 +132,14 @@ app.post('/edit', (req,res) => {
             }
         })
     })
-
-    
 })
+    
+app.get('/map', (req, res) => {
+    let location = {
+        latitude: req.query.lat,
+        longitude: req.query.lon
+    }
+    res.render('restaurant_map', {location: location}); 
+});
 
 module.exports = app;

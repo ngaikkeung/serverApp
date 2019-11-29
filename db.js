@@ -70,16 +70,15 @@ module.exports = class DB{
         }
 
         this.getRestaurantList = (callback) => {
+            let project = {
+                projection: {
+                    restaurant_id : 1,
+                    name : 1
+                }
+            }
             if(isConnected){
-                database.collection("restaurant").find({}, (err, res) => {
-                    res.toArray((error, document) => {
-                        if(error){
-                            console.log("doc to array failed");
-                        }else{
-                            callback(err, document);
-                        }
-                    })
-                    
+                database.collection("restaurant").find({}, project).toArray((err, res) => {
+                    callback(err, res);
                 })
             }else{
                 callback(true, "DB is disconnected");
