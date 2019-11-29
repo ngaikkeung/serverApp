@@ -21,17 +21,17 @@ app.post('/create', (req,res) => {
             borough : fields['borough'],
             cuisine : fields['cuisine'],
             photo : null,
-            mimetype : files.restaurant_photo.type, // TODO
+            mimetype : files.restaurant_photo.type, 
             address : {
                 street : fields['street'],
                 building : fields['building'],
+                zipcode: fields['zipcode'],
                 coord : {
                     latitude: fields['lat'],
                     longitude: fields['lon'],
-                    zipcode: fields['zipcode'],
                 },
             },
-            owner : userid // TODO
+            owner : userid 
         }
 
         fs.readFile(files.restaurant_photo.path, (err, data) => {
@@ -87,10 +87,10 @@ app.get('/edit', (req,res) => {
             console.log("ERR!", err);
         }else{
             if(response){
-                console.log("Edition show success", response);
+                console.log("Edit form show success", response);
                 res.render('restaurant_edit', {restaurant : response});
             }else{
-                console.log("Edition show failed", response);
+                console.log("Edit form show failed", response);
             }
         }
     })
@@ -98,33 +98,35 @@ app.get('/edit', (req,res) => {
 
 app.post('/edit', (req,res) => {
     const form = new formidable.IncomingForm();
-    
 
     form.parse(req, (err, fields, files) => {
         let restaurantObjectId = req.query._id;
-        let restaurantUpdate = { $set: {
-            name: fields['name'],
-            borough : fields['borough'],
-            cuisine : fields['cuisine'],
-            photo : null,
-            mimetype : files.restaurant_photo.type, // TODO
-            address : {
-                street : fields['street'],
-                building : fields['building'],
-                coord : {
-                    latitude: fields['lon'],
-                    longitude: fields['lat'],
-                },
+        let restaurantUpdate = { 
+            $set: {
+                name: fields['name'],
+                borough : fields['borough'],
+                cuisine : fields['cuisine'],
+                address : {
+                    street : fields['street'],
+                    building : fields['building'],
+                    zipcode: fields['zipcode'],
+                    coord : {
+                        latitude: fields['lat'],
+                        longitude: fields['lon'],
+                    },
+                }
             }
-        }}
+        }
+        console.log("restaurantObjectId", restaurantObjectId);
+        console.log("restaurantUpdate", restaurantUpdate);
         
-        DB.editRestaurant(restaurantUpdate, restaurantObjectId, (err, response) => {
+        DB.editRestaurant(restaurantObjectId, restaurantUpdate, (err, response) => {
             if(err){
                 console.log("ERR!", err);
             }else{
                 if(response){
                     console.log("Edit restaurant success");
-                    res.redirect(`/restaurant/show?_id=${restaurantObj.restaurant_id}`);
+                    res.redirect(`/restaurant/show?_id=${restaurantObjectId}`);
                 }else{
                     console.log("Edit restaurant failed", err);
                     res.redirect(`/restaurant/edit`);

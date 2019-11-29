@@ -9,7 +9,7 @@
 <body>
     <h1>Edit Restaurant</h1>
     <div class="col-md-8">
-        <form action="/restaurant/edit" method="post" enctype="multipart/form-data">
+        <form action="/restaurant/edit?_id=<%= restaurant.restaurant_id %>" method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label class="">Name</label>
                 <input name="name" class="form-control" type="text" value="<%= restaurant.name %>">
@@ -32,7 +32,7 @@
             </div>
             <div class="form-group">
                 <label class="">Zipcode</label>
-                <input name="zipcode" class="form-control" type="text" value="<%= restaurant.zipcode %>">
+                <input name="zipcode" class="form-control" type="text" value="<%= restaurant.address.zipcode %>">
             </div>
             <div class="form-group">
                 <label class="">GPS Coordinates (lon.)</label>
@@ -42,10 +42,10 @@
                 <label class="">GPS Coordinates (lat.)</label>
                 <input name="lat" class="form-control" type="text" value="<%= restaurant.address.coord.latitude %>">
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label class="">Photo</label>
                 <input name="restaurant_photo" class="form-control" type="file">
-            </div>
+            </div> -->
             <button class="btn btn-primary"> Edit </button>
         </form>
         <p>

@@ -11,7 +11,7 @@
 <body>
     <h1>Map</h1>
     <div class="contrainer">
-        <div id="mapid" style="height: 180px">
+        <div id="mapid" style="height: 200px">
         </div>
         <p><a href="/">Home</a><p>    
     </div>
@@ -20,7 +20,7 @@
         let latitude = <%= location.latitude %>;
         let longitude = <%= location.longitude %>;
 
-        var mymap = L.map('mapid').setView([latitude, longitude], 13);
+        var mymap = L.map('mapid').setView([latitude, longitude], 25);
         var marker = L.marker([latitude, longitude]).addTo(mymap);
 
         L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
