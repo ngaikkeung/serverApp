@@ -242,7 +242,7 @@ app.get('/searchAction', (req, res) => {
         }else{
             if(response){
                 console.log("Search success!")
-                res.redirect(`/restaurant/search?keyword=${keyword}`, {searchResultList: response})
+                res.render('restaurant_search', {searchResultList: response})
             }else{
                 console.log('Search filed')
                 res.redirect('/restaurant/search')
