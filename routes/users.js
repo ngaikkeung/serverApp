@@ -34,7 +34,7 @@ app.post('/register', (req, res) => {
     let pw = req.body.password;
     let pw2 = req.body.password2;
 
-    if(uname == "" || pw == "" || pw2 == "" || pw !== pw2){
+    if(uname == "" || pw !== pw2){
         console.log("Form data error!")
     }else{
         DB.register(uname, pw, (err, response) => {
