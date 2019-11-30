@@ -10,7 +10,6 @@ app.use(session({
 
 app.get('/', (req, res) => {
     if(req.session.authenticated){
-        console.log("session: ", req.session);
         DB.getRestaurantList((err, response) => {
             if(err){
                 console.log("ERR!", err);
