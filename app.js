@@ -15,9 +15,14 @@ app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/users'));
 app.use('/restaurant', require('./routes/restaurant'));
 
+// RESTful API
+app.use('/api', require('./routes/api_restaurant'));
+
+
+
+// Default 404
 app.use(function(req, res){
     res.render('err_page', {errTitle: "404 Not found.", errMsg: "URL path not found."})
 });
-
 
 app.listen(process.env.PORT || 8099);

@@ -114,15 +114,15 @@ app.post('/edit', (req,res) => {
         let restaurantUpdate = { 
             $set: {
                 name: fields['name'],
-                borough : fields['borough'],
-                cuisine : fields['cuisine'],
+                borough : (fields['borough'] ? fields['borough'] : null),
+                cuisine : (fields['cuisine'] ? fields['cuisine'] : null),
                 address : {
-                    street : fields['street'],
-                    building : fields['building'],
-                    zipcode: fields['zipcode'],
+                    street : (fields['street'] ? fields['street'] : null),
+                    building : (fields['building'] ? fields['building'] : null),
+                    zipcode: (fields['zipcode'] ? fields['zipcode'] : null),
                     coord : {
-                        latitude: fields['lat'],
-                        longitude: fields['lon'],
+                        latitude: (fields['lat'] ? fields['lat'] : null),
+                        longitude: (fields['lon'] ? fields['lon'] : null),
                     },
                 }
             }
@@ -131,7 +131,7 @@ app.post('/edit', (req,res) => {
         fs.readFile(files.restaurant_photo.path, (err, data) => {
             if (!err) {
                 if(data != ""){
-                    restaurantObj.photo = new Buffer(data).toString("base64");
+                    restaurantUpdate.$set.photo = new Buffer(data).toString("base64");
                 }
                 DB.updateRestaurant(restaurantObjectId, restaurantUpdate, (err, response) => {
                     if(err){
@@ -147,7 +147,7 @@ app.post('/edit', (req,res) => {
                     }
                 })
             }else {
-                console.log("/Create/restaurant: read photo failed");
+                console.log("/Edit/restaurant: read photo failed", err);
             }
         })
     })

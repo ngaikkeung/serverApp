@@ -120,5 +120,47 @@ module.exports = class DB{
                 callback(true, "DB is disconnected");
             }
         }
+
+        // API 
+        this.getRestaurantAPI = (selectKey, selectValue, callback) => {
+            if(isConnected){
+                let filter = {};
+                filter[selectKey] = selectValue;
+                let project = {
+                    projection : {
+                        photo: 0
+                    } 
+                }
+                database.collection("restaurant").find(filter, project).toArray((err, res) => {
+                    callback(err, res)
+                })
+            }else{
+                callback(true, "DB is disconnected");
+            }
+        }
+        this.getRestaurantListAPI = (callback) => {
+            let project = {
+                projection: {
+                    photo : 0,
+                }
+            }
+            if(isConnected){
+                database.collection("restaurant").find({}, project).toArray((err, res) => {
+                    callback(err, res);
+                })
+            }else{
+                callback(true, "DB is disconnected");
+            }
+        }
+        this.postRestaurantAPI = (obj, callback) => {
+            if(isConnected){
+                database.collection("restaurant").insertOne(obj, (err, res) => {
+                    callback(err, res);
+                })
+
+            }else{
+                callback(true, "DB is disconnected");
+            }
+        }
     }
 }
