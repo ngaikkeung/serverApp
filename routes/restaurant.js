@@ -129,17 +129,26 @@ app.post('/edit', (req,res) => {
         console.log("restaurantObjectId", restaurantObjectId);
         console.log("restaurantUpdate", restaurantUpdate);
         
-        DB.editRestaurant(restaurantObjectId, restaurantUpdate, (err, response) => {
-            if(err){
-                console.log("ERR!", err);
-            }else{
-                if(response){
-                    console.log("Edit restaurant success");
-                    res.redirect(`/restaurant/show?_id=${restaurantObjectId}`);
-                }else{
-                    console.log("Edit restaurant failed", err);
-                    res.redirect(`/restaurant/edit`);
+        fs.readFile(files.restaurant_photo.path, (err, data) => {
+            if (!err) {
+                if(data != ""){
+                    restaurantObj.photo = new Buffer(data).toString("base64");
                 }
+                DB.editRestaurant(restaurantObjectId, restaurantUpdate, (err, response) => {
+                    if(err){
+                        console.log("ERR!", err);
+                    }else{
+                        if(response){
+                            console.log("Edit restaurant success");
+                            res.redirect(`/restaurant/show?_id=${restaurantObjectId}`);
+                        }else{
+                            console.log("Edit restaurant failed", err);
+                            res.redirect(`/restaurant/edit`);
+                        }
+                    }
+                })
+            }else {
+                console.log("/Create/restaurant: read photo failed");
             }
         })
     })
@@ -219,4 +228,27 @@ app.post('/rate', (req, res) => {
         })
     });
 })
+
+app.get('/search', (req, res) => {
+    res.render('restaurant_search')
+})
+
+app.get('/searchAction', (req, res) => {
+    let keyword = req.query.keyword; 
+
+    DB.searchRestaurant(keyword, (err, response) => {
+        if(err){
+            console.log("ERR!")
+        }else{
+            if(response){
+                console.log("Search success!")
+                res.redirect(`/restaurant/search?keyword=${keyword}`, {searchResultList: response})
+            }else{
+                console.log('Search filed')
+                res.redirect('/restaurant/search')
+            }
+        }
+    })
+})
+
 module.exports = app;

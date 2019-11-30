@@ -110,5 +110,16 @@ module.exports = class DB{
                 callback(true, "DB is disconnected");
             }
         }
+
+        this.searchRestaurant = (keyword, callback) => {
+            if(isConnected){
+                database.collection("restaurant").find({$text: {$search: keyword}}).toArray((err, res) => {
+                    console.log(res);
+                    callback(err, res);
+                })
+            }else{
+                callback(true, "DB is disconnected");
+            }
+        }
     }
 }
