@@ -15,17 +15,56 @@
             </div>
         <% } %>
         <p>
-        <label class="badge badge-info">Cuisine: </label><%= restaurant.cuisine %></p>
-        <label class="badge badge-info">Borough: </label><%= restaurant.borough %></p>
-        <label class="badge badge-info">Street: </label><%= restaurant.address.street %></p>
-        <label class="badge badge-info">Building: </label><%= restaurant.address.building %></p>
-        <label class="badge badge-info">Zipcode: </label><%= restaurant.address.zipcode %></p>
-        <label class="badge badge-info">GPS: </label>[<%= restaurant.address.coord.latitude %>, <%= restaurant.address.coord.longitude %>]</p>
+        <label class="badge badge-info">Cuisine: </label>
+            <% if(restaurant.cuisine != null){ %>
+                <%= restaurant.cuisine %>
+            <% }else{ %>
+                <%= "N.A" %>
+            <% } %>
+        </p>
+        <label class="badge badge-info">Borough: </label>
+            <% if(restaurant.borough != null){ %>
+                <%= restaurant.borough %>
+            <% }else{ %>
+                <%= "N.A" %>
+            <% } %>
+        </p>
+        <label class="badge badge-info">Street: </label>
+            <% if(restaurant.address.street != null){ %>
+                <%= restaurant.address.street %>
+            <% }else{ %>
+                <%= "N.A" %>
+            <% } %>
+        </p>
+        <label class="badge badge-info">Building: </label>
+            <% if(restaurant.address.building != null){ %>
+                <%= restaurant.address.building %>
+            <% }else{ %>
+                <%= "N.A" %>
+            <% } %>
+        </p>
+        <label class="badge badge-info">Zipcode: </label>
+            <% if(restaurant.address.zipcode != null){ %>
+                <%= restaurant.address.zipcode %>
+            <% }else{ %>
+                <%= "N.A" %>
+            <% } %>
+        </p>
+        <label class="badge badge-info">GPS: </label>
+            <% if(restaurant.address.coord.latitude != null && restaurant.address.coord.longitude != null){ %>
+                [<%= restaurant.address.coord.latitude %>, <%= restaurant.address.coord.longitude %>]
+            <% }else{ %>
+                <%= "N.A" %>
+            <% } %>
+        </p>
         <label class="badge badge-info">Rating: </label>
             <% if(restaurant.grades != null){ %>
-                    <% for(index in restaurant.grades){ %>
-                        <span><%= restaurant.grades[index].score %> (by: <%= restaurant.grades[index].user %>)</span>
-                    <% } %>
+                <% for(index in restaurant.grades){ %>
+                    <span><%= restaurant.grades[index].score %> (by: <%= restaurant.grades[index].user %>)</span>
+                <% } %>
+                <% if(restaurant.grades.length == 0){ %>
+                    <%= "No rate record." %>
+                <% } %>
             <% } %>
         <p></p>
         <label class="badge badge-info">Created by: </label><%= restaurant.owner%></p>
