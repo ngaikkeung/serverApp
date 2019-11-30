@@ -31,6 +31,7 @@ app.post('/create', (req,res) => {
                     longitude: fields['lon'],
                 },
             },
+            grades: [],
             owner : userid 
         }
 
@@ -132,7 +133,7 @@ app.post('/edit', (req,res) => {
                 if(data != ""){
                     restaurantObj.photo = new Buffer(data).toString("base64");
                 }
-                DB.editRestaurant(restaurantObjectId, restaurantUpdate, (err, response) => {
+                DB.updateRestaurant(restaurantObjectId, restaurantUpdate, (err, response) => {
                     if(err){
                         console.log("ERR!", err);
                     }else{
