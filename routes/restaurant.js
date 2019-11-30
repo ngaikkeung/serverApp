@@ -87,7 +87,7 @@ app.get('/edit', (req,res) => {
             console.log("ERR!", err);
         }else{
             if(response){
-                console.log("Edit form show success", response);
+                console.log("Edit form show success");
 
                 // checking autority
                 if(userid != response.owner){
@@ -126,8 +126,6 @@ app.post('/edit', (req,res) => {
                 }
             }
         }
-        console.log("restaurantObjectId", restaurantObjectId);
-        console.log("restaurantUpdate", restaurantUpdate);
         
         fs.readFile(files.restaurant_photo.path, (err, data) => {
             if (!err) {
