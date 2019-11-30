@@ -114,7 +114,6 @@ module.exports = class DB{
         this.searchRestaurant = (keyword, callback) => {
             if(isConnected){
                 database.collection("restaurant").find({$text: {$search: keyword}}).toArray((err, res) => {
-                    console.log(res);
                     callback(err, res);
                 })
             }else{

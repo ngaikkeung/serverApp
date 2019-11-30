@@ -210,23 +210,53 @@ app.post('/rate', (req, res) => {
             }
         }
 
-        DB.updateRestaurant(restaurant_id, restaurantUpdate, (err, response) => {
+        checkRatedBefore(userid, restaurant_id, (isRated) => {
+            if(isRated){
+                res.render('err_page', {
+                    errTitle: "Rate failed!",
+                    errMsg: "You had rated before. Cannot rate again!"
+                })
+            }else{
+                DB.updateRestaurant(restaurant_id, restaurantUpdate, (err, response) => {
+                    if(err){
+                        console.log("ERR!")
+                    }else{
+                        if(response){
+                            console.log("Rate success!")
+                            res.redirect(`/restaurant/show?_id=${restaurant_id}`)
+                        }else{
+                            console.log("Rate failed")
+                            res.redirect('/err_page', {
+                                errTitle: "Rate error.",
+                                errMsg: "Rating restaurant is failed."
+                            })
+                        }
+                    }
+                })
+            }
+        })
+
+    });
+
+    const checkRatedBefore = (userid, restaurantObjectId, callback) => {
+        DB.getRestaurant(restaurantObjectId, (err, response) => {
             if(err){
                 console.log("ERR!")
             }else{
                 if(response){
-                    console.log("Rate success!")
-                    res.redirect(`/restaurant/show?_id=${restaurant_id}`)
-                }else{
-                    console.log("Rate failed")
-                    res.redirect('/err_page', {
-                        errTitle: "Rate error.",
-                        errMsg: "Rating restaurant is failed."
-                    })
+                    for(eachGrade of response.grades){
+                        if(eachGrade.user == userid){
+                            console.log("Rated before!")
+                            callback(true);
+                            return;
+                        }
+                    }
                 }
             }
+            console.log("Have not rate before!")
+            callback(false)
         })
-    });
+    }
 })
 
 app.get('/search', (req, res) => {
