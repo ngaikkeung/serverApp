@@ -5,6 +5,17 @@ const formidable = require('formidable');
 const DB = new (require('../db.js'))();
 const ObjectId = require('mongodb').ObjectID;
 
+const sessionChecker = (req, res, next) => {
+    if (!req.session.authenticated) {
+        res.render('login');
+    } else {
+        next();
+    }    
+};
+
+app.get('/*', sessionChecker, (req, res, next) => {
+    next();
+})
 
 app.get('/create', (req,res) => {
     res.render('restaurant_create');

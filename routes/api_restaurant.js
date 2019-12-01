@@ -41,8 +41,8 @@ router
             name : req.body['name'],
             borough : (req.body['borough'] ? req.body['borough'] : null),
             cuisine : (req.body['cuisine'] ? req.body['cuisine'] : null),
-            photo : null,
-            mimetype : null, 
+            photo : (req.body['photo'] ? req.body['photo'] : null),
+            mimetype : (req.body['mimetype'] ? req.body['mimetype'] : null),
             address : {
                 street : (req.body['street'] ? req.body['street'] : null),
                 building : (req.body['building'] ? req.body['building'] : null),

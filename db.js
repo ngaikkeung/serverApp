@@ -127,9 +127,9 @@ module.exports = class DB{
                 let filter = {};
                 filter[selectKey] = selectValue;
                 let project = {
-                    projection : {
-                        photo: 0
-                    } 
+                    // projection : {
+                    //     photo: 0
+                    // } 
                 }
                 database.collection("restaurant").find(filter, project).toArray((err, res) => {
                     callback(err, res)
@@ -140,9 +140,9 @@ module.exports = class DB{
         }
         this.getRestaurantListAPI = (callback) => {
             let project = {
-                projection: {
-                    photo : 0,
-                }
+                // projection: {
+                //     photo : 0,
+                // }
             }
             if(isConnected){
                 database.collection("restaurant").find({}, project).toArray((err, res) => {
