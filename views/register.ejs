@@ -3,35 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.css">
     <title>Register Page</title>
 </head>
 <body>
-    <h1>Register</h1>
-    <form action="/users/register" method="POST">
-        <label for="username">Username</label>
-        <input
-            type="text"
-            name="username"
-            placeholder="Enter User Name"
-            value="<%= typeof name != 'undefined' ? name : '' %>"
-        /></br>
-        <label for="password">Password</label>
-        <input
-            type="password"
-            name="password"
-            placeholder="Create Password"
-            value="<%= typeof password != 'undefined' ? password : '' %>"
-        /></br>
-        <label for="password2">Confirm Password</label>
-        <input
-            type="password"
-            name="password2"
-            placeholder="Confirm Password"
-            value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
-        /></br>
-        </div>
-        <button type="submit">Register</button>
-    </form>
-    <p>Have An Account? <a href="/users/login">Login</a></p>
+    <div class="container-fluid">
+        <h1>Register</h1>
+        <hr>
+        <div class="content col-md-4">
+                <form action="/users/register" method="POST">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                            <input
+                                class="form-control"
+                                type="text"
+                                name="username"
+                                id="username"
+                                placeholder="Enter user name"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                            <input
+                                class="form-control"    
+                                type="password"
+                                name="password"
+                                id="password"
+                                placeholder="Enter Password"/>
+                    </div>
+                    <div class="form-group">
+                            <label for="password2">Confirm Password</label>
+                                <input
+                                    class="form-control"    
+                                    type="password"
+                                    name="password2"
+                                    id="password2"
+                                    placeholder="Enter Password"/>
+                        </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+            <div>
+                <small>Have Account? <a href="/users/login">Login</a></small>
+            </div>
+    </div>
 </body>
 </html>

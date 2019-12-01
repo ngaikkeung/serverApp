@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.css">
     <title>Error Page</title>
 </head>
 <body>
-    <h1>
-        Error!
-    </h1>
-    <h3>
-        <%= errTitle %>
-    </h3>
-    <p>
-        <%= errMsg %>
-    </p>
-    <p><a href="/">Home</a></p>
+    <div class="container-fluid">
+    <h1>Error!</h1>
+    <hr>
+    <h3><%= errTitle %></h3>
+    <p><%= errMsg %></p>
+    <p><a class="btn btn-outline-primary" href="/">Home</a></p>
+    <button class="btn btn-outline-primary" onclick="window.history.back()">Go Back</button>
 </body>
 </html>

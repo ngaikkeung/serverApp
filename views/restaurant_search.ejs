@@ -7,22 +7,27 @@
     <title>Search Restaurant</title>
 </head>
 <body>
-    <h1>Searching</h1>
-    <form action="/restaurant/searchAction" method="GET">
-        <input type="text" name="keyword" size="50" placeholder="Enter keyword for searching..."/>
-        <button class="btn btn-primary"> Search </button>
-    </form>
-    <hr>
-    <% if(locals.searchResultList) { %>
-        <table>
-            <% searchResultList.map((restaurant, index) => { %>
-            <tr>
-                <td><a href="/restaurant/show?_id=<%= restaurant.restaurant_id %>"><%= ++index %>. <%= restaurant.name %></a></td>
-            </tr>
-            <% }) %>
-        </table>
-    <% } %>
-    <hr>
-    <a href="/">Home</a>
+    <div class="container-fluid">
+        <h1>Searching</h1>
+        <hr>
+        <form action="/restaurant/searchAction" method="GET">
+            <input class="form-control" type="text" name="keyword" size="50" placeholder="Enter keyword for searching..."/>
+            <br>
+            <button class="btn btn-primary"> Search </button>
+        </form>
+        <hr>
+        <% if(locals.searchResultList) { %>
+            <table>
+                <% searchResultList.map((restaurant, index) => { %>
+                <tr>
+                    <td><a href="/restaurant/show?_id=<%= restaurant.restaurant_id %>"><%= ++index %>. <%= restaurant.name %></a></td>
+                </tr>
+                <% }) %>
+            </table>
+            <hr>
+        <% } %>
+        <a class="btn btn-outline-primary" href="/">Home</a>
+        <button class="btn btn-outline-primary" onclick="window.history.back()">Go Back</button>
+    </div>
 </body>
 </html>

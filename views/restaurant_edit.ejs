@@ -7,56 +7,55 @@
     <title>Restaurant Edit</title>
 </head>
 <body>
-    <h1>Edit Restaurant</h1>
-    <div class="col-md-8">
-        <form action="/restaurant/edit?_id=<%= restaurant.restaurant_id %>" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <label class="">Name</label>
-                <input name="name" class="form-control" type="text" value="<%= restaurant.name %>">
-            </div>
-            <div class="form-group">
-                <label class="">Cuisine</label>
-                <input name="cuisine" class="form-control" type="text" value="<%= restaurant.cuisine %>">
-            </div>
-            <div class="form-group">
-                    <label class="">Borough</label>
-                    <input name="borough" class="form-control" type="text" value="<%= restaurant.borough %>">
+    <div class="container-fluid">
+        <h1>Edit Restaurant</h1>
+        <hr>
+        <div class="content col-md-8">
+            <form action="/restaurant/edit?_id=<%= restaurant.restaurant_id %>" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label class="">Name</label>
+                    <input name="name" class="form-control" type="text" value="<%= restaurant.name %>">
                 </div>
-            <div class="form-group">
-                <label class="">Street</label>
-                <input name="street" class="form-control" type="text" value="<%= restaurant.address.street %>">
+                <div class="form-group">
+                    <label class="">Cuisine</label>
+                    <input name="cuisine" class="form-control" type="text" value="<%= restaurant.cuisine %>">
+                </div>
+                <div class="form-group">
+                        <label class="">Borough</label>
+                        <input name="borough" class="form-control" type="text" value="<%= restaurant.borough %>">
+                    </div>
+                <div class="form-group">
+                    <label class="">Street</label>
+                    <input name="street" class="form-control" type="text" value="<%= restaurant.address.street %>">
+                </div>
+                <div class="form-group">
+                    <label class="">Building</label>
+                    <input name="building" class="form-control" type="text" value="<%= restaurant.address.building %>">
+                </div>
+                <div class="form-group">
+                    <label class="">Zipcode</label>
+                    <input name="zipcode" class="form-control" type="text" value="<%= restaurant.address.zipcode %>">
+                </div>
+                <div class="form-group">
+                    <label class="">GPS Coordinates (lon.)</label>
+                    <input name="lon" class="form-control" type="number" step="0.00001" value="<%= restaurant.address.coord.longitude %>">
+                </div>
+                <div class="form-group">
+                    <label class="">GPS Coordinates (lat.)</label>
+                    <input name="lat" class="form-control" type="number" step="0.00001" value="<%= restaurant.address.coord.latitude %>">
+                </div>
+                <div class="form-group">
+                    <label class="">Photo</label>
+                    <input name="restaurant_photo" class="form-control" type="file">
+                </div>
+                <button class="btn btn-primary"> Edit </button>
+            </form>
+            <hr>
+            <div class="option">
+                    <a class="btn btn-outline-primary" href="/users/logout">Logout</a>
+                    <button class="btn btn-outline-primary" onclick="window.history.back()">Go Back</button>
             </div>
-            <div class="form-group">
-                <label class="">Building</label>
-                <input name="building" class="form-control" type="text" value="<%= restaurant.address.building %>">
-            </div>
-            <div class="form-group">
-                <label class="">Zipcode</label>
-                <input name="zipcode" class="form-control" type="text" value="<%= restaurant.address.zipcode %>">
-            </div>
-            <div class="form-group">
-                <label class="">GPS Coordinates (lon.)</label>
-                <input name="lon" class="form-control" type="number" step="0.00001" value="<%= restaurant.address.coord.longitude %>">
-            </div>
-            <div class="form-group">
-                <label class="">GPS Coordinates (lat.)</label>
-                <input name="lat" class="form-control" type="number" step="0.00001" value="<%= restaurant.address.coord.latitude %>">
-            </div>
-            <div class="form-group">
-                <label class="">Photo</label>
-                <input name="restaurant_photo" class="form-control" type="file">
-            </div>
-            <button class="btn btn-primary"> Edit </button>
-        </form>
-        <p>
-
-        </p>
-        <p>
-            <a href="/users/logout">Logout</a>
-        </p>
-        <p>
-            <a href="/">Back</a>
-        </p>
+        </div>
     </div>
 </body>
 </html>

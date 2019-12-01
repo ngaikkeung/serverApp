@@ -14,7 +14,7 @@ const sessionChecker = (req, res, next) => {
 app.use(session({
     name: "session",
     secret: "loginInfo",
-    maxAge: 60 * 1000 // 1 minutes to expire
+    maxAge: (60 * 1000) * 10 // 3 minutes to expire
 }))
 
 app.get('/', sessionChecker, (req, res) => {

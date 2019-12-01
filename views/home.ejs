@@ -3,23 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.css">
     <title>Home Page</title>
 </head>
 <body>
-    <h1>Restaurant</h1>
-    <p>Welcome <%= userid %> !</p>
-    <a href="/users/logout">Logout</a>
-    <a href="/restaurant/create">Create Restaurant</a>
-    <a href="/restaurant/search">Search Restaurant</a>
-    <hr>
-    <% if(restaurantList !== null) { %>
-        <table>
-            <% restaurantList.map((restaurant, index) => { %>
-            <tr>
-                <td><a href="/restaurant/show?_id=<%= restaurant.restaurant_id %>"><%= ++index %>. <%= restaurant.name %></a></td>
-            </tr>
-            <% }) %>
-        </table>
-    <% } %>
+    <div class="container-fluid">
+        <h1>Restaurant</h1>
+        <hr>
+        <div class="menu">
+            <h4>Welcome <%= userid %> !</h4>
+            <a href="/users/logout" class="btn btn-primary">Logout</a>
+            <a href="/restaurant/create" class="btn btn-outline-primary">Create Restaurant</a>
+            <a href="/restaurant/search" class="btn btn-outline-primary">Search Restaurant</a>
+        </div>
+        <br>
+        <% if(restaurantList !== null) { %>
+            <table class="table">
+                <% restaurantList.map((restaurant, index) => { %>
+                <tr>
+                    <td><a href="/restaurant/show?_id=<%= restaurant.restaurant_id %>"><%= ++index %>. <%= restaurant.name %></a></td>
+                </tr>
+                <% }) %>
+            </table>
+        <% } %>
+    </div>
 </body>
 </html>

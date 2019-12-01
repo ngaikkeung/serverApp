@@ -7,73 +7,78 @@
     <title>Restaurant</title>
 </head>
 <body>
-    <h1><%= restaurant.name %></h1>
-    <div class="contrainer">
-        <% if(restaurant.photo !== null){ %>
-            <div class="col-12">
-                <img class="mx-auto d-block rounded img-fluid" style="width:80%" src="data:<%= restaurant.mimetype %>;base64, <%= restaurant.photo %> ">
-            </div>
-        <% } %>
-        <p>
-        <label class="badge badge-info">Cuisine: </label>
-            <% if(restaurant.cuisine != null){ %>
-                <%= restaurant.cuisine %>
-            <% }else{ %>
-                <%= "N.A" %>
+    <div class="container-fluid">
+        <h1>Restaurant: <%= restaurant.name %></h1>
+        <hr>
+        <div class="content col-md-10">
+            <% if(restaurant.photo !== null){ %>
+                <div class="col-12">
+                    <img class="mx-auto d-block rounded img-fluid" style="width:80%" src="data:<%= restaurant.mimetype %>;base64, <%= restaurant.photo %> ">
+                </div>
             <% } %>
-        </p>
-        <label class="badge badge-info">Borough: </label>
-            <% if(restaurant.borough != null){ %>
-                <%= restaurant.borough %>
-            <% }else{ %>
-                <%= "N.A" %>
-            <% } %>
-        </p>
-        <label class="badge badge-info">Street: </label>
-            <% if(restaurant.address.street != null){ %>
-                <%= restaurant.address.street %>
-            <% }else{ %>
-                <%= "N.A" %>
-            <% } %>
-        </p>
-        <label class="badge badge-info">Building: </label>
-            <% if(restaurant.address.building != null){ %>
-                <%= restaurant.address.building %>
-            <% }else{ %>
-                <%= "N.A" %>
-            <% } %>
-        </p>
-        <label class="badge badge-info">Zipcode: </label>
-            <% if(restaurant.address.zipcode != null){ %>
-                <%= restaurant.address.zipcode %>
-            <% }else{ %>
-                <%= "N.A" %>
-            <% } %>
-        </p>
-        <label class="badge badge-info">GPS: </label>
-            <% if(restaurant.address.coord.latitude != null && restaurant.address.coord.longitude != null){ %>
-                [<%= restaurant.address.coord.latitude %>, <%= restaurant.address.coord.longitude %>]
-            <% }else{ %>
-                <%= "N.A" %>
-            <% } %>
-        </p>
-        <label class="badge badge-info">Rating: </label>
-            <% if(restaurant.grades != null){ %>
-                <% for(index in restaurant.grades){ %>
-                    <span><%= restaurant.grades[index].score %> (by: <%= restaurant.grades[index].user %>)</span>
+            <p>
+            <label class="badge badge-dark">Cuisine: </label>
+                <% if(restaurant.cuisine != null){ %>
+                    <%= restaurant.cuisine %>
+                <% }else{ %>
+                    <%= "N.A" %>
                 <% } %>
-                <% if(restaurant.grades.length == 0){ %>
-                    <%= "No rate record." %>
+            </p>
+            <label class="badge badge-dark">Borough: </label>
+                <% if(restaurant.borough != null){ %>
+                    <%= restaurant.borough %>
+                <% }else{ %>
+                    <%= "N.A" %>
                 <% } %>
-            <% } %>
-        <p></p>
-        <label class="badge badge-info">Created by: </label><%= restaurant.owner%></p>
+            </p>
+            <label class="badge badge-dark">Street: </label>
+                <% if(restaurant.address.street != null){ %>
+                    <%= restaurant.address.street %>
+                <% }else{ %>
+                    <%= "N.A" %>
+                <% } %>
+            </p>
+            <label class="badge badge-dark">Building: </label>
+                <% if(restaurant.address.building != null){ %>
+                    <%= restaurant.address.building %>
+                <% }else{ %>
+                    <%= "N.A" %>
+                <% } %>
+            </p>
+            <label class="badge badge-dark">Zipcode: </label>
+                <% if(restaurant.address.zipcode != null){ %>
+                    <%= restaurant.address.zipcode %>
+                <% }else{ %>
+                    <%= "N.A" %>
+                <% } %>
+            </p>
+            <label class="badge badge-dark">GPS: </label>
+                <% if(restaurant.address.coord.latitude != null && restaurant.address.coord.longitude != null){ %>
+                    [<%= restaurant.address.coord.latitude %>, <%= restaurant.address.coord.longitude %>]
+                <% }else{ %>
+                    <%= "N.A" %>
+                <% } %>
+            </p>
+            <label class="badge badge-dark">Rating: </label>
+                <% if(restaurant.grades != null){ %>
+                    <% for(index in restaurant.grades){ %>
+                        <span><%= restaurant.grades[index].score %> (by: <%= restaurant.grades[index].user %>)</span>
+                    <% } %>
+                    <% if(restaurant.grades.length == 0){ %>
+                        <%= "No rate record." %>
+                    <% } %>
+                <% } %>
+            <p></p>
+            <label class="badge badge-dark">Created by: </label>
+                <%= restaurant.owner%></p>
 
-        <a href="/restaurant/edit?_id=<%= restaurant.restaurant_id %>">Edit</a>
-        <a href="/restaurant/delete?_id=<%= restaurant.restaurant_id %>&owner=<%= restaurant.owner %>">Delete</a>
-        <a href="/restaurant/rate?_id=<%= restaurant.restaurant_id %>">Rate</a>
-        <a href="/restaurant/map?lat=<%= restaurant.address.coord.latitude %>&lon=<%= restaurant.address.coord.longitude%>">Map</a>  </p>  
-        <a href="/">Home</a>
+            <a class="btn btn-outline-primary" href="/restaurant/edit?_id=<%= restaurant.restaurant_id %>">Edit</a>
+            <a class="btn btn-outline-danger" href="/restaurant/delete?_id=<%= restaurant.restaurant_id %>&owner=<%= restaurant.owner %>">Delete</a>
+            <a class="btn btn-outline-primary" href="/restaurant/rate?_id=<%= restaurant.restaurant_id %>">Rate</a>
+            <a class="btn btn-outline-primary" href="/restaurant/map?lat=<%= restaurant.address.coord.latitude %>&lon=<%= restaurant.address.coord.longitude%>">Map</a>  </p>  
+            <a class="btn btn-primary" href="/">Home</a>
+            <button class="btn btn-outline-primary" onclick="window.history.back()">Go Back</button>
+        </div>
     </div>
 </body>
 </html>
